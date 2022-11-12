@@ -54,10 +54,11 @@
     - name: Enable sample.service, ensure it is not masked and start it
       become: true
       ansible.builtin.systemd:
-        name: sample.service
+        daemon_reload: yes
+        name: sample
         enabled: yes
         masked: no
-        state: restarted
+        state: started
 
 
     - name: Create a Nginx config
@@ -80,4 +81,4 @@
     - name: Reload Systemd
       become: true
       ansible.builtin.systemd:
-        daemon_reloaded: yes
+        daemon_reload: yes
